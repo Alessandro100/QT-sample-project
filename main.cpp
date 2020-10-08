@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "customchart.h"
 #include "customlinebarchart.h"
+#include "qcustomplot.h"
 
 #include <QApplication>
 #include <QPushButton>
@@ -11,6 +12,8 @@ QT_CHARTS_USE_NAMESPACE
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
+    MainWindow w;
+
     QWidget *window = new QWidget;
     QHBoxLayout *layout = new QHBoxLayout;
 
@@ -25,12 +28,17 @@ int main(int argc, char *argv[])
     pal.setColor(QPalette::WindowText, QRgb(0x404040));
     qApp->setPalette(pal);
 
+    // Real time plotting
+    //QCustomPlot *customPlot = ui->widget;
+    //
+
     layout->addWidget(chartView1);
     layout->addWidget(chartView2);
 
     window->setLayout(layout);
     window->resize(1000,500);
-    window->show();
+    //window->show();
+    w.show();
 
     return a.exec();
 }

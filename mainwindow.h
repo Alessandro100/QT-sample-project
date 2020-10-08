@@ -14,8 +14,19 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
+    void addPoint(double x, double y);
+    void clearData();
+    void plot();
+
+private slots:
+    void on_MainWindow_customContextMenuRequested(const QPoint &pos);
+
+    void on_btn_add_clicked();
+
+    void on_btn_clear_clicked();
 
 private:
     Ui::MainWindow *ui;
+    QVector<double> qv_x, qv_y;
 };
 #endif // MAINWINDOW_H
