@@ -10,11 +10,13 @@ CONFIG += c++11
 
 SOURCES += \
     customchart.cpp \
+    customlinebarchart.cpp \
     main.cpp \
     mainwindow.cpp
 
 HEADERS += \
     customchart.h \
+    customlinebarchart.h \
     mainwindow.h
 
 FORMS += \
