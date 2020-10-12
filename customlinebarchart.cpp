@@ -27,6 +27,7 @@ QtCharts::QChartView * CustomLineBarChart::getChart() {
     chart->setTitle("Simple line chart example");
 
     QChartView *chartView = new QChartView(chart);
+
     chartView->setRenderHint(QPainter::Antialiasing);
     return chartView;
 }

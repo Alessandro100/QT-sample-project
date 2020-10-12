@@ -25,8 +25,11 @@ private slots:
 
     void on_btn_clear_clicked();
 
+    void on_btn_read_clicked();
+
 private:
     Ui::MainWindow *ui;
     QVector<double> qv_x, qv_y;
+    QVector<double> qv_x_file, qv_y_file;
 };
 #endif // MAINWINDOW_H

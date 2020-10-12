@@ -1,5 +1,12 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include "customchart.h"
+#include "customlinebarchart.h"
+#include <QFile>
+#include <QTextStream>
+#include <QMessageBox>
+#include <QFileDialog>
+#include <QDir>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -8,7 +15,21 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
 
     ui->plot->addGraph();
+    ui->excel_plot->addGraph();
     ui->plot->graph(0)->setScatterStyle(QCPScatterStyle::ssCircle);
+    ui->excel_plot->graph(0)->setScatterStyle(QCPScatterStyle::ssCircle);
+    ui->excel_plot->graph(0)->rescaleAxes();
+    ui->excel_plot->setInteractions(QCP::iRangeDrag | QCP::iRangeZoom | QCP::iSelectPlottables);
+
+//    CustomChart cc = CustomChart();
+//    CustomLineBarChart customBarChart = CustomLineBarChart();
+
+//    QChartView *chartView1 = customBarChart.getChart();
+//    QChartView *chartView2 = cc.getChart();
+
+    //layout()->addWidget(chartView1);
+    //layout()->addWidget(chartView2);
+
 }
 
 MainWindow::~MainWindow()
@@ -54,3 +75,28 @@ void MainWindow::on_MainWindow_customContextMenuRequested(const QPoint &pos)
 
 }
 
+
+void MainWindow::on_btn_read_clicked()
+{
+    QString file_name = QFileDialog::getOpenFileName(this, "Open file", QDir::homePath());
+
+    QFile file(file_name);
+    if(!file.open(QFile::ReadOnly | QFile::Text)) {
+        QMessageBox::warning(this, "title", "file not open");
+    }
+
+    QTextStream in(&file);
+    int count = 0;
+    while(!in.atEnd()) {
+        QString mText = in.readLine();
+        QStringList splitString = mText.split(",");
+        if(count != 0) {
+            qv_x_file.append(splitString.first().toDouble());
+            qv_y_file.append(splitString.last().toDouble());
+        }
+        count ++;
+    }
+    ui->excel_plot->graph(0)->setData(qv_x_file, qv_y_file);
+    ui->excel_plot->replot();
+    ui->excel_plot->update();
+}
