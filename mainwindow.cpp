@@ -20,16 +20,6 @@ MainWindow::MainWindow(QWidget *parent)
     ui->excel_plot->graph(0)->setScatterStyle(QCPScatterStyle::ssCircle);
     ui->excel_plot->graph(0)->rescaleAxes();
     ui->excel_plot->setInteractions(QCP::iRangeDrag | QCP::iRangeZoom | QCP::iSelectPlottables);
-
-//    CustomChart cc = CustomChart();
-//    CustomLineBarChart customBarChart = CustomLineBarChart();
-
-//    QChartView *chartView1 = customBarChart.getChart();
-//    QChartView *chartView2 = cc.getChart();
-
-    //layout()->addWidget(chartView1);
-    //layout()->addWidget(chartView2);
-
 }
 
 MainWindow::~MainWindow()
